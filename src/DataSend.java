@@ -21,7 +21,14 @@ public class DataSend implements Runnable{
  
 	
 	public static void main(ArrayList<MessageStorage> messages) throws IOException {
-
+		
+		int sleepTime = randomizeMe(10,1);
+		try {
+			Thread.sleep(sleepTime*1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 			
 		while (!socket_connect()){
 			
