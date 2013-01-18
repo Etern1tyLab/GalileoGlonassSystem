@@ -46,8 +46,8 @@ public class ParseTxt {
 		      int adc2 = 0;
 		      int sats = 0;
 			
-		    String aLineClear = aLine.replace(";", ",");  
-		      
+		    String aLineClear = aLine.replaceAll(";", ",");  
+		  
 		    //Используем второй сканнер для получения каждой строчки 
 		    Scanner scanner = new Scanner(aLineClear);
 		    scanner.useDelimiter(",");
@@ -58,7 +58,7 @@ public class ParseTxt {
 		      longitude = (int)(Float.valueOf(scanner.next())*1000000);
 		      speed = Integer.valueOf(scanner.next())*10;
 		      height = Integer.valueOf(scanner.next());
-		      for (int i=1;i <= 32;i++){
+		      while(scanner.hasNext() ){
 		    	 String test = scanner.next();
 		    	if (test.startsWith("hdop:")) {
 		    		hdop = (int)(Float.valueOf(test.substring(5))*10);

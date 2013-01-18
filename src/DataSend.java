@@ -22,9 +22,9 @@ public class DataSend implements Runnable{
 	
 	public static void main(ArrayList<MessageStorage> messages) throws IOException {
 		
-		int sleepTime = randomizeMe(10,1);
+		int sleepTime = randomizeStartTime(10,1);
 		try {
-			Thread.sleep(sleepTime*1000);
+			Thread.sleep(sleepTime*60*1000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -102,7 +102,8 @@ public class DataSend implements Runnable{
 		     
 		        out.close();
 		        in.close();
-		        clientSocket.close();   
+		        clientSocket.close();
+		        System.exit(1);
 	       }   
 	       
 	       catch (IOException e)
@@ -214,7 +215,7 @@ public static byte[] send_black_message (byte[] bm, int size){
 				black_message_end[i+1]=message_length[3-i];
 			}	
 			
-			black_message_end[2] = (byte) 0x80;
+			black_message_end[2] &= (byte) 0x80;
 			
 			for (int i=0;i<=size-1;i++){
 				black_message_end[i+3] = bm[i];
@@ -724,5 +725,9 @@ public static byte[] send_black_message (byte[] bm, int size){
 			 return random_number;
 		 }
 		}
-	
+	 
+	public static int randomizeStartTime (int max,int min) {
+		 Random r = new Random();
+		 int random_number = r.nextInt(max - min + 1) + min;
+		 return random_number;}
 }
